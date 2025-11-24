@@ -1314,33 +1314,26 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                 *ngIf="currentTab === 'content'"
                 class="bg-white rounded shadow-md border border-[#E9E9E9]"
               >
-                <!-- Selected Features Tabs -->
-                <div class="border-b border-[#CED4DA]">
-                  <div class="flex items-center gap-0 px-8 pt-8">
+                <!-- Selected Features Tabs - Only Show If Features Are Selected -->
+                <div *ngIf="activeFeatures.length > 0" class="px-8 py-6 border-b border-[#CED4DA] bg-white">
+                  <div class="flex items-center gap-3 flex-wrap">
                     <button
                       *ngFor="let featureId of activeFeatures; let i = index"
                       [class.active-feature-tab]="i === selectedFeatureIndex"
                       (click)="selectedFeatureIndex = i"
-                      class="relative flex items-center gap-2 px-6 py-2.5 bg-white border border-[#CED4DA] shadow-sm transition-all hover:bg-gray-50"
+                      class="flex items-center gap-2 px-4 py-2.5 rounded border transition-all font-medium text-sm md:text-base"
                       [ngClass]="{
-                        'bg-[#009FD8] text-white border-[#009FD8]':
+                        'bg-[#009FD8] text-white border-[#009FD8] shadow-md':
                           i === selectedFeatureIndex,
-                        'bg-white text-[#686868] border-[#CED4DA]':
+                        'bg-white text-[#686868] border-[#CED4DA] hover:border-[#049AD0] hover:text-[#049AD0]':
                           i !== selectedFeatureIndex,
-                        'rounded-l': i === 0 && i !== selectedFeatureIndex,
-                        'rounded-r':
-                          i === activeFeatures.length - 1 &&
-                          i !== selectedFeatureIndex,
-                        rounded:
-                          i === selectedFeatureIndex ||
-                          (i === 0 && i === activeFeatures.length - 1),
                       }"
                     >
                       <div
                         [innerHTML]="getFeatureTabIcon(featureId, i)"
-                        class="w-6 h-6"
+                        class="w-5 h-5 flex items-center justify-center flex-shrink-0"
                       ></div>
-                      <span class="text-sm md:text-base font-normal">
+                      <span class="whitespace-nowrap">
                         {{ getFeatureLabel(featureId) }}
                       </span>
                     </button>
@@ -1348,28 +1341,194 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                 </div>
 
                 <!-- Content Area -->
-                <div class="p-8" style="min-height: 400px;">
+                <div class="p-8">
+                  <!-- Schedule Feature Content -->
+                  <div *ngIf="activeFeatures.length > 0 && activeFeatures[selectedFeatureIndex] === 'schedule'">
+                    <div class="flex flex-col gap-0">
+                      <!-- Header Container with Title and Controls -->
+                      <div class="bg-[#F5F5F5] border border-[#CED4DA] rounded-t-md">
+                        <div class="flex items-center justify-between px-6 py-4 gap-6">
+                          <h2 class="text-xl font-medium text-[#686868] whitespace-nowrap">Schedule</h2>
+
+                          <div class="flex-1 flex items-center justify-end gap-3">
+                            <!-- Search Bar -->
+                            <div class="relative">
+                              <input
+                                type="text"
+                                placeholder="Search"
+                                class="h-11 pl-5 pr-11 border border-[#DADADA] rounded text-base font-medium placeholder-[#878A99] focus:outline-none focus:border-[#049AD0] bg-[#FBFBFB] transition-colors"
+                                style="width: 220px;"
+                              />
+                              <svg
+                                class="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#B1B1B1] pointer-events-none"
+                                fill="none"
+                                viewBox="0 0 18 18"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M9 0C13.9705 0 17.9998 4.02959 18 9C18 13.9706 13.9706 18 9 18C4.02959 17.9998 0 13.9705 0 9C0.000175931 4.0297 4.0297 0.000175935 9 0ZM9 1.5C4.85812 1.50018 1.50018 4.85812 1.5 9C1.5 13.142 4.85801 16.4998 9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.4998 4.85801 13.142 1.5 9 1.5Z"
+                                  fill="currentColor"
+                                />
+                              </svg>
+                            </div>
+
+                            <!-- Upload Schedule Button -->
+                            <button
+                              class="flex items-center gap-2 px-4 h-11 border border-[#049AD0] rounded font-semibold text-sm text-[#049AD0] bg-white hover:bg-gray-50 transition-colors whitespace-nowrap"
+                            >
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M10.4424 9.58572C10.2135 9.35684 9.84256 9.35684 9.61368 9.58572L7.1033 12.0961C6.87442 12.325 6.87442 12.6959 7.1033 12.9248C7.33203 13.1535 7.70313 13.1535 7.93185 12.9248L9.44202 11.4146V15.6485C9.44202 15.972 9.70447 16.2344 10.028 16.2344C10.3516 16.2344 10.6139 15.972 10.6139 15.6485V11.4146L12.1241 12.9247C12.3531 13.1537 12.7239 13.1535 12.9528 12.9247C13.1816 12.6959 13.1816 12.325 12.9528 12.0961L10.4424 9.58572Z"
+                                  fill="#049AD0"
+                                />
+                                <path
+                                  d="M12.5385 6.90369H7.51758C7.19409 6.90369 6.93164 7.16599 6.93164 7.48962C6.93164 7.81311 7.19409 8.07556 7.51758 8.07556H12.5385C12.862 8.07556 13.1244 7.81311 13.1244 7.48962C13.1244 7.16599 12.8621 6.90369 12.5385 6.90369Z"
+                                  fill="#049AD0"
+                                />
+                                <path
+                                  d="M15.677 0H6.89056C6.73523 0 6.58615 0.0617981 6.47629 0.171661L2.71072 3.93723C2.60086 4.04709 2.53906 4.19617 2.53906 4.3515V18.1589C2.53906 19.174 3.36502 20 4.38019 20H15.677C16.6893 20 17.5182 19.1815 17.5182 18.1589V1.84113C17.5182 0.828857 16.6998 0 15.677 0ZM6.93222 1.37283V3.72391C6.93222 4.09302 6.63208 4.39316 6.26297 4.39316H3.9119L6.93222 1.37283ZM16.3463 18.1589C16.3463 18.5234 16.0516 18.8281 15.677 18.8281H4.38019C4.01123 18.8281 3.71094 18.5278 3.71094 18.1589V5.56519H6.26297C7.27814 5.56519 8.1041 4.73923 8.1041 3.72406V1.17188H15.677C16.0417 1.17188 16.3463 1.46667 16.3463 1.84113V18.1589Z"
+                                  fill="#049AD0"
+                                />
+                              </svg>
+                              <span>Upload Schedule</span>
+                            </button>
+
+                            <!-- Add Schedule Button -->
+                            <button
+                              class="flex items-center gap-2 px-4 h-11 border border-[#049AD0] rounded font-semibold text-sm text-white bg-[#009FD8] hover:bg-[#0385b5] transition-colors whitespace-nowrap"
+                            >
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  d="M12 5V19"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                                <path
+                                  d="M5 12H19"
+                                  stroke="white"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                              <span>Add Schedule</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Table -->
+                      <div class="border border-[#CED4DA] border-t-0 rounded-b-md overflow-hidden">
+                        <!-- Table Header Row -->
+                        <div class="bg-white border-b border-[#CED4DA] grid grid-cols-[70px_1fr_130px_130px_130px_130px_100px] px-6 py-4 gap-4">
+                          <div class="text-[#181C32] font-bold text-base text-center">Sr. No</div>
+                          <div class="text-[#181C32] font-bold text-base">Title</div>
+                          <div class="text-[#181C32] font-bold text-base text-center">Date</div>
+                          <div class="text-[#181C32] font-bold text-base text-center">Start Time</div>
+                          <div class="text-[#181C32] font-bold text-base text-center">End Time</div>
+                          <div class="text-[#181C32] font-bold text-base text-center">Sponsor</div>
+                          <div class="text-[#181C32] font-bold text-base text-center">Action</div>
+                        </div>
+
+                        <!-- Table Body (Empty State) -->
+                        <div class="bg-white min-h-80 flex items-center justify-center">
+                          <div class="text-center py-16">
+                            <svg
+                              width="64"
+                              height="64"
+                              viewBox="0 0 32 32"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="mx-auto mb-4 opacity-20"
+                            >
+                              <path
+                                d="M28 4H4C2.89543 4 2 4.89543 2 6V26C2 27.1046 2.89543 28 4 28H28C29.1046 28 30 27.1046 30 26V6C30 4.89543 29.1046 4 28 4ZM28 10H4V6H28V10ZM4 26V14H28V26H4Z"
+                                fill="#CED4DA"
+                              />
+                            </svg>
+                            <p class="text-[#686868] font-medium text-base mt-2">No schedules added yet</p>
+                            <p class="text-[#878A99] text-sm mt-2">Click "Add Schedule" to create your first schedule</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Other Features Content (Placeholder) -->
                   <div
+                    *ngIf="activeFeatures.length > 0 && activeFeatures[selectedFeatureIndex] !== 'schedule'"
                     class="flex flex-col items-center justify-center py-16 text-center"
                   >
                     <div
-                      class="w-16 h-16 mb-6 flex items-center justify-center"
+                      class="w-24 h-24 mb-6 flex items-center justify-center bg-[#F0F7FB] rounded-lg"
                       [innerHTML]="
                         getFeatureIcon(activeFeatures[selectedFeatureIndex])
                       "
                     ></div>
-                    <h3 class="text-xl font-semibold text-[#181C32] mb-2">
+                    <h3 class="text-2xl font-bold text-[#181C32] mb-3">
                       {{
                         getFeatureLabel(activeFeatures[selectedFeatureIndex])
                       }}
-                      Content
+                    </h3>
+                    <p class="text-base text-[#686868] max-w-lg mb-6">
+                      Configure the content and settings for the
+                      {{
+                        getFeatureLabel(activeFeatures[selectedFeatureIndex])
+                      }}
+                      feature.
+                    </p>
+                    <div
+                      class="bg-[#E8F4F8] border border-[#49B5D8] rounded-lg p-4 max-w-lg text-left"
+                    >
+                      <p class="text-sm text-[#049AD0] font-medium">
+                        💡 Content configuration for
+                        <strong>{{ getFeatureLabel(activeFeatures[selectedFeatureIndex]) }}</strong>
+                        will be available in the next release.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- No Features Selected -->
+                  <div
+                    *ngIf="activeFeatures.length === 0"
+                    class="flex flex-col items-center justify-center py-20 text-center"
+                  >
+                    <svg
+                      width="80"
+                      height="80"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="mb-6 opacity-30"
+                    >
+                      <path
+                        d="M28 4H4C2.89543 4 2 4.89543 2 6V26C2 27.1046 2.89543 28 4 28H28C29.1046 28 30 27.1046 30 26V6C30 4.89543 29.1046 4 28 4ZM28 10H4V6H28V10ZM4 26V14H28V26H4Z"
+                        fill="#CED4DA"
+                      />
+                      <path d="M8 18H12V22H8V18Z" fill="#CED4DA" />
+                      <path d="M16 18H20V22H16V18Z" fill="#CED4DA" />
+                      <path d="M24 18H28V22H24V18Z" fill="#CED4DA" />
+                    </svg>
+                    <h3 class="text-xl font-semibold text-[#878A99] mb-2">
+                      No Features Selected
                     </h3>
                     <p class="text-base text-[#686868] max-w-md">
-                      Configure the content for
-                      {{
-                        getFeatureLabel(activeFeatures[selectedFeatureIndex])
-                      }}
-                      feature here.
+                      Go back to the Event Features tab and select features to
+                      configure their content.
                     </p>
                   </div>
                 </div>
@@ -1381,6 +1540,8 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                   <button
                     (click)="onNext()"
                     class="flex items-center gap-2 px-5 py-2 bg-[#009FD8] hover:bg-[#0385b5] text-white rounded font-semibold transition-colors"
+                    [disabled]="activeFeatures.length === 0"
+                    [ngClass]="{'opacity-50 cursor-not-allowed': activeFeatures.length === 0}"
                   >
                     <span>Next</span>
                     <svg
@@ -1427,16 +1588,6 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
 
       .feature-active span {
         color: white !important;
-      }
-
-      .active-feature-tab {
-        background-color: #009fd8 !important;
-        color: white !important;
-        border-color: #009fd8 !important;
-      }
-
-      .active-feature-tab svg path {
-        fill: white !important;
       }
     `,
   ],
