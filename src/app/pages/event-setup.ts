@@ -1458,9 +1458,17 @@ export class EventSetupComponent implements OnInit {
   logoPreview: string | null = null;
   bannerPreview: string | null = null;
 
-  activeFeatures: string[] = ["schedule"];
+  activeFeatures: string[] = [
+    "schedule",
+    "exhibitor",
+    "about",
+    "information",
+    "speakers",
+    "sponsors",
+  ];
   draggedFeatureId: string | null = null;
   isDragOverSelected = false;
+  selectedFeatureIndex = 0;
 
   inactiveFeatures = [
     {
