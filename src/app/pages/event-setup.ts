@@ -1660,22 +1660,45 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                       activeFeatures.length > 0 &&
                       activeFeatures[selectedFeatureIndex] === 'exhibitor'
                     "
-                    class="flex flex-col h-full"
+                    class="flex flex-col h-full bg-white"
                   >
-                    <div class="flex-1 overflow-auto">
-                      <div class="p-8">
-                        <!-- Header -->
-                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-                          <h2
-                            class="text-xl lg:text-[22px] font-semibold text-[#181C32] mb-4 sm:mb-0"
-                          >
+                    <!-- Header Section -->
+                    <div class="flex-shrink-0 border-b border-[#CED4DA] bg-[#F5F5F5]">
+                      <div class="px-6 py-6">
+                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                          <!-- Title -->
+                          <h2 class="text-lg lg:text-xl font-medium text-[#686868]">
                             Exhibitors
                           </h2>
 
-                          <!-- Upload and Add Buttons -->
-                          <div class="flex flex-col sm:flex-row gap-3">
+                          <!-- Search, Upload and Add Section -->
+                          <div class="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center">
+                            <!-- Search Bar -->
+                            <div class="flex-1 sm:flex-initial relative">
+                              <input
+                                [(ngModel)]="searchQuery"
+                                type="text"
+                                placeholder="Search"
+                                class="w-full px-4 py-2 border border-[#DADADA] rounded bg-[#FBFBFB] text-[#686868] placeholder-[#878A99] focus:outline-none focus:ring-1 focus:ring-[#049AD0]"
+                              />
+                              <svg
+                                class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#B1B1B1]"
+                                fill="none"
+                                viewBox="0 0 18 18"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  clip-rule="evenodd"
+                                  d="M9 1.5C4.85786 1.5 1.5 4.85786 1.5 9C1.5 13.1421 4.85786 16.5 9 16.5C13.1421 16.5 16.5 13.1421 16.5 9C16.5 4.85786 13.1421 1.5 9 1.5ZM0 9C0 4.02944 4.02944 0 9 0C13.9706 0 18 4.02944 18 9C18 13.9706 13.9706 18 9 18C4.02944 18 0 13.9706 0 9Z"
+                                  fill="currentColor"
+                                />
+                              </svg>
+                            </div>
+
+                            <!-- Upload Button -->
                             <button
-                              class="h-10 px-5 bg-white border border-[#049AD0] rounded text-[#049AD0] font-semibold text-base flex items-center justify-center gap-2 hover:bg-[#F5F5F5] transition-colors"
+                              class="h-11 px-5 bg-white border border-[#049AD0] rounded text-[#049AD0] font-semibold text-sm lg:text-base flex items-center justify-center gap-2 hover:bg-[#F5F5F5] transition-colors whitespace-nowrap"
                             >
                               <svg
                                 width="20"
@@ -1686,23 +1709,24 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                               >
                                 <path
                                   d="M10.4424 9.58572C10.2135 9.35684 9.84256 9.35684 9.61368 9.58572L7.1033 12.0961C6.87442 12.325 6.87442 12.6959 7.1033 12.9248C7.33203 13.1535 7.70313 13.1535 7.93185 12.9248L9.44202 11.4146V15.6485C9.44202 15.972 9.70447 16.2344 10.028 16.2344C10.3516 16.2344 10.6139 15.972 10.6139 15.6485V11.4146L12.1241 12.9247C12.3531 13.1537 12.7239 13.1535 12.9528 12.9247C13.1816 12.6959 13.1816 12.325 12.9528 12.0961L10.4424 9.58572Z"
-                                  fill="#049AD0"
+                                  fill="currentColor"
                                 />
                                 <path
                                   d="M12.5385 6.90369H7.51758C7.19409 6.90369 6.93164 7.16599 6.93164 7.48962C6.93164 7.81311 7.19409 8.07556 7.51758 8.07556H12.5385C12.862 8.07556 13.1244 7.81311 13.1244 7.48962C13.1244 7.16599 12.8621 6.90369 12.5385 6.90369Z"
-                                  fill="#049AD0"
+                                  fill="currentColor"
                                 />
                                 <path
                                   d="M15.677 0H6.89056C6.73523 0 6.58615 0.0617981 6.47629 0.171661L2.71072 3.93723C2.60086 4.04709 2.53906 4.19617 2.53906 4.3515V18.1589C2.53906 19.174 3.36502 20 4.38019 20H15.677C16.6893 20 17.5182 19.1815 17.5182 18.1589V1.84113C17.5182 0.828857 16.6998 0 15.677 0ZM6.93222 1.37283V3.72391C6.93222 4.09302 6.63208 4.39316 6.26297 4.39316H3.9119L6.93222 1.37283ZM16.3463 18.1589C16.3463 18.5234 16.0516 18.8281 15.677 18.8281H4.38019C4.01123 18.8281 3.71094 18.5278 3.71094 18.1589V5.56519H6.26297C7.27814 5.56519 8.1041 4.73923 8.1041 3.72406V1.17188H15.677C16.0417 1.17188 16.3463 1.46667 16.3463 1.84113V18.1589Z"
-                                  fill="#049AD0"
+                                  fill="currentColor"
                                 />
                               </svg>
-                              <span>Upload Exhibitor</span>
+                              <span class="hidden sm:inline">Upload Exhibitor</span>
                             </button>
 
+                            <!-- Add Button -->
                             <button
                               (click)="openExhibitorModal()"
-                              class="h-10 px-5 bg-[#049AD0] hover:bg-[#0385b5] rounded text-white font-semibold text-base flex items-center justify-center gap-2 transition-colors"
+                              class="h-11 px-5 bg-[#049AD0] hover:bg-[#0385b5] rounded text-white font-semibold text-sm lg:text-base flex items-center justify-center gap-2 transition-colors whitespace-nowrap"
                             >
                               <svg
                                 width="20"
@@ -1716,151 +1740,173 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                                   fill="white"
                                 />
                               </svg>
-                              <span>Add Exhibitor</span>
+                              <span class="hidden sm:inline">Add Exhibitors</span>
                             </button>
                           </div>
                         </div>
+                      </div>
+                    </div>
 
-                        <!-- Empty State -->
-                        <div
-                          *ngIf="exhibitors.length === 0"
-                          class="bg-white min-h-80 flex items-center justify-center rounded border border-[#E9E9E9]"
-                        >
-                          <div class="text-center">
-                            <svg
-                              width="80"
-                              height="80"
-                              viewBox="0 0 32 32"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="mx-auto mb-4 opacity-30"
-                            >
-                              <path
-                                d="M28 4H4C2.89543 4 2 4.89543 2 6V26C2 27.1046 2.89543 28 4 28H28C29.1046 28 30 27.1046 30 26V6C30 4.89543 29.1046 4 28 4ZM28 10H4V6H28V10ZM4 26V14H28V26H4Z"
-                                fill="#CED4DA"
-                              />
-                              <path d="M8 18H12V22H8V18Z" fill="#CED4DA" />
-                              <path d="M16 18H20V22H16V18Z" fill="#CED4DA" />
-                              <path d="M24 18H28V22H24V18Z" fill="#CED4DA" />
-                            </svg>
-                            <h3
-                              class="text-xl font-semibold text-[#878A99] mb-2"
-                            >
-                              No exhibitors added yet
-                            </h3>
-                            <p class="text-[#878A99] text-sm">
-                              Click "Add Exhibitor" to get started
-                            </p>
-                          </div>
+                    <!-- Content Section -->
+                    <div class="flex-1 overflow-auto">
+                      <!-- Empty State -->
+                      <div
+                        *ngIf="getFilteredExhibitors().length === 0"
+                        class="h-full flex items-center justify-center px-6 py-12"
+                      >
+                        <div class="text-center">
+                          <svg
+                            width="80"
+                            height="80"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="mx-auto mb-4 opacity-30"
+                          >
+                            <path
+                              d="M28 4H4C2.89543 4 2 4.89543 2 6V26C2 27.1046 2.89543 28 4 28H28C29.1046 28 30 27.1046 30 26V6C30 4.89543 29.1046 4 28 4ZM28 10H4V6H28V10ZM4 26V14H28V26H4Z"
+                              fill="#CED4DA"
+                            />
+                            <path d="M8 18H12V22H8V18Z" fill="#CED4DA" />
+                            <path d="M16 18H20V22H16V18Z" fill="#CED4DA" />
+                            <path d="M24 18H28V22H24V18Z" fill="#CED4DA" />
+                          </svg>
+                          <h3 class="text-xl font-semibold text-[#878A99] mb-2">
+                            No exhibitors added yet
+                          </h3>
+                          <p class="text-[#878A99] text-sm">
+                            Click "Add Exhibitors" button to get started
+                          </p>
                         </div>
+                      </div>
 
-                        <!-- Exhibitor Table -->
-                        <div
-                          *ngIf="exhibitors.length > 0"
-                          class="overflow-x-auto rounded border border-[#E9E9E9]"
-                        >
-                          <table class="w-full">
-                            <!-- Table Header -->
-                            <thead class="bg-[#F5F5F5] border-b border-[#E9E9E9]">
-                              <tr>
-                                <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32]">
-                                  Sr. No
-                                </th>
-                                <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32]">
-                                  Name of Company
-                                </th>
-                                <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32]">
-                                  Hall No.
-                                </th>
-                                <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32]">
-                                  Stall No.
-                                </th>
-                                <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32]">
-                                  Registration Code
-                                </th>
-                                <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32]">
-                                  Action
-                                </th>
-                              </tr>
-                            </thead>
+                      <!-- Exhibitor Table -->
+                      <div
+                        *ngIf="getFilteredExhibitors().length > 0"
+                        class="border-t border-[#CED4DA]"
+                      >
+                        <table class="w-full">
+                          <!-- Table Header -->
+                          <thead class="bg-white border-b border-[#CED4DA] sticky top-0">
+                            <tr>
+                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] whitespace-nowrap">
+                                Sr. No
+                              </th>
+                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] whitespace-nowrap">
+                                Name of Company
+                              </th>
+                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] whitespace-nowrap">
+                                Hall No.
+                              </th>
+                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] whitespace-nowrap">
+                                Stall No.
+                              </th>
+                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] whitespace-nowrap">
+                                Registration Code
+                              </th>
+                              <th class="px-6 py-4 text-center text-base font-semibold text-[#181C32] whitespace-nowrap">
+                                Action
+                              </th>
+                            </tr>
+                          </thead>
 
-                            <!-- Table Body -->
-                            <tbody>
-                              <tr
-                                *ngFor="let exhibitor of exhibitors; let i = index"
-                                class="border-b border-[#E9E9E9] hover:bg-[#F9F9F9] transition-colors"
-                              >
-                                <td class="px-6 py-4 text-base font-semibold text-[#353846]">
-                                  {{ i + 1 }}
-                                </td>
-                                <td class="px-6 py-4 text-base font-semibold text-[#353846]">
-                                  {{ exhibitor.companyName }}
-                                </td>
-                                <td class="px-6 py-4 text-base font-semibold text-[#353846]">
-                                  {{ exhibitor.hallNo }}
-                                </td>
-                                <td class="px-6 py-4 text-base font-semibold text-[#353846]">
-                                  {{ exhibitor.stallNo }}
-                                </td>
-                                <td class="px-6 py-4 text-base font-semibold text-[#353846]">
-                                  {{ exhibitor.registrationCode }}
-                                </td>
-                                <td class="px-6 py-4">
-                                  <div class="flex gap-2">
-                                    <button
-                                      (click)="editExhibitor(exhibitor)"
-                                      class="w-10 h-10 bg-[#009FD8] hover:bg-[#0385b5] rounded-full flex items-center justify-center transition-colors"
-                                      title="Edit"
-                                    >
-                                      <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M14.5735 5.82031C14.3281 5.57485 13.9375 5.57485 13.6921 5.82031L4.18359 15.3289C4.08203 15.4305 4.01172 15.5586 3.98438 15.6992L2.82031 20.7422C2.72656 21.125 2.92969 21.5078 3.29688 21.6016C3.39844 21.6289 3.5 21.6426 3.60156 21.6426C3.91797 21.6426 4.20703 21.5 4.38281 21.2422L9.42578 20.0781C9.56641 20.0508 9.69453 19.9805 9.79609 19.8789L19.3047 10.3703C19.5391 10.1348 19.7031 9.82422 19.7031 9.49609C19.7031 9.16797 19.5391 8.86328 19.3047 8.62109L14.5735 5.82031ZM8.5 18.5L5.5 19.5L6.5 16.5L13.6919 9.30859L16.6919 12.3086L8.5 18.5Z"
-                                          fill="white"
-                                        />
-                                      </svg>
-                                    </button>
-                                    <button
-                                      (click)="deleteExhibitor(exhibitor.id)"
-                                      class="w-10 h-10 bg-[#BF0505] hover:bg-[#9b0404] rounded-full flex items-center justify-center transition-colors"
-                                      title="Delete"
-                                    >
-                                      <svg
-                                        width="20"
-                                        height="20"
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <path
-                                          d="M15.834 5.83337C15.613 5.83337 15.401 5.92117 15.2447 6.07745C15.0884 6.23373 15.0007 6.44569 15.0007 6.66671V15.9925C14.9767 16.4139 14.7873 16.8088 14.4736 17.0912C14.1598 17.3736 13.7472 17.5205 13.3257 17.5H6.67565C6.25406 17.5205 5.84147 17.3736 5.52774 17.0912C5.21401 16.8088 5.02456 16.4139 5.00065 15.9925V6.66671C5.00065 6.44569 4.91285 6.23373 4.75657 6.07745C4.60029 5.92117 4.38833 5.83337 4.16732 5.83337C3.9463 5.83337 3.73434 5.92117 3.57806 6.07745C3.42178 6.23373 3.33398 6.44569 3.33398 6.66671V15.9925C3.35777 16.8561 3.7228 17.675 4.34913 18.2699C4.97547 18.8648 5.81204 19.1873 6.67565 19.1667H13.3257C14.1893 19.1873 15.0258 18.8648 15.6522 18.2699C16.2785 17.675 16.6435 16.8561 16.6673 15.9925V6.66671C16.6673 6.44569 16.5795 6.23373 16.4232 6.07745C16.267 5.92117 16.055 5.83337 15.834 5.83337Z"
-                                          fill="white"
-                                        />
-                                        <path
-                                          d="M16.6667 3.33337H13.3333V1.66671C13.3333 1.44569 13.2455 1.23373 13.0893 1.07745C12.933 0.921171 12.721 0.833374 12.5 0.833374H7.5C7.27899 0.833374 7.06702 0.921171 6.91074 1.07745C6.75446 1.23373 6.66667 1.44569 6.66667 1.66671V3.33337H3.33333C3.11232 3.33337 2.90036 3.42117 2.74408 3.57745C2.5878 3.73373 2.5 3.94569 2.5 4.16671C2.5 4.38772 2.5878 4.59968 2.74408 4.75596C2.90036 4.91224 3.11232 5.00004 3.33333 5.00004H16.6667C16.8877 5.00004 17.0996 4.91224 17.2559 4.75596C17.4122 4.59968 17.5 4.38772 17.5 4.16671C17.5 3.94569 17.4122 3.73373 17.2559 3.57745C17.0996 3.42117 16.8877 3.33337 16.6667 3.33337ZM8.33333 3.33337V2.50004H11.6667V3.33337H8.33333Z"
-                                          fill="white"
-                                        />
-                                        <path
-                                          d="M9.16667 14.1667V8.33333C9.16667 8.11232 9.07887 7.90036 8.92259 7.74408C8.76631 7.5878 8.55435 7.5 8.33333 7.5C8.11232 7.5 7.90036 7.5878 7.74408 7.74408C7.5878 7.90036 7.5 8.11232 7.5 8.33333V14.1667C7.5 14.3877 7.5878 14.5996 7.74408 14.7559C7.90036 14.9122 8.11232 15 8.33333 15C8.55435 15 8.76631 14.9122 8.92259 14.7559C9.07887 14.5996 9.16667 14.3877 9.16667 14.1667Z"
-                                          fill="white"
-                                        />
-                                        <path
-                                          d="M12.5007 14.1667V8.33333C12.5007 8.11232 12.4129 7.90036 12.2566 7.74408C12.1003 7.5878 11.8883 7.5 11.6673 7.5C11.4463 7.5 11.2343 7.5878 11.0781 7.74408C10.9218 7.90036 10.834 8.11232 10.834 8.33333V14.1667C10.834 14.3877 10.9218 14.5996 11.0781 14.7559C11.2343 14.9122 11.4463 15 11.6673 15C11.8883 15 12.1003 14.9122 12.2566 14.7559C12.4129 14.5996 12.5007 14.3877 12.5007 14.1667Z"
-                                          fill="white"
-                                        />
-                                      </svg>
-                                    </button>
+                          <!-- Table Body -->
+                          <tbody>
+                            <tr
+                              *ngFor="let exhibitor of getFilteredExhibitors(); let i = index"
+                              class="border-b border-[#E9E9E9] hover:bg-[#F9F9F9] transition-colors"
+                            >
+                              <td class="px-6 py-4 text-base font-semibold text-[#353846] text-center">
+                                {{ i + 1 }}
+                              </td>
+                              <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                  <!-- Company Logo -->
+                                  <div
+                                    *ngIf="exhibitor.companyLogo"
+                                    class="w-12 h-12 flex-shrink-0 rounded bg-[#F5F5F5] flex items-center justify-center overflow-hidden"
+                                  >
+                                    <img
+                                      [src]="exhibitor.companyLogo"
+                                      [alt]="exhibitor.companyName"
+                                      class="w-full h-full object-cover"
+                                    />
                                   </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
+                                  <div
+                                    *ngIf="!exhibitor.companyLogo"
+                                    class="w-12 h-12 flex-shrink-0 rounded bg-[#F5F5F5] flex items-center justify-center text-[#B1B1B1] font-semibold text-sm"
+                                  >
+                                    {{ exhibitor.companyName.substring(0, 2).toUpperCase() }}
+                                  </div>
+                                  <span class="text-base font-semibold text-[#353846]">
+                                    {{ exhibitor.companyName }}
+                                  </span>
+                                </div>
+                              </td>
+                              <td class="px-6 py-4 text-base font-semibold text-[#353846]">
+                                {{ exhibitor.hallNo }}
+                              </td>
+                              <td class="px-6 py-4 text-base font-semibold text-[#353846]">
+                                {{ exhibitor.stallNo }}
+                              </td>
+                              <td class="px-6 py-4 text-base font-semibold text-[#353846]">
+                                {{ exhibitor.registrationCode }}
+                              </td>
+                              <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                  <button
+                                    (click)="editExhibitor(exhibitor)"
+                                    class="w-10 h-10 bg-[#009FD8] hover:bg-[#0385b5] rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+                                    title="Edit"
+                                  >
+                                    <svg
+                                      width="20"
+                                      height="20"
+                                      viewBox="0 0 20 20"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M14.5735 5.82031C14.3281 5.57485 13.9375 5.57485 13.6921 5.82031L4.18359 15.3289C4.08203 15.4305 4.01172 15.5586 3.98438 15.6992L2.82031 20.7422C2.72656 21.125 2.92969 21.5078 3.29688 21.6016C3.39844 21.6289 3.5 21.6426 3.60156 21.6426C3.91797 21.6426 4.20703 21.5 4.38281 21.2422L9.42578 20.0781C9.56641 20.0508 9.69453 19.9805 9.79609 19.8789L19.3047 10.3703C19.5391 10.1348 19.7031 9.82422 19.7031 9.49609C19.7031 9.16797 19.5391 8.86328 19.3047 8.62109L14.5735 5.82031ZM8.5 18.5L5.5 19.5L6.5 16.5L13.6919 9.30859L16.6919 12.3086L8.5 18.5Z"
+                                        fill="white"
+                                      />
+                                    </svg>
+                                  </button>
+                                  <button
+                                    (click)="deleteExhibitor(exhibitor.id)"
+                                    class="w-10 h-10 bg-[#BF0505] hover:bg-[#9b0404] rounded-full flex items-center justify-center transition-colors flex-shrink-0"
+                                    title="Delete"
+                                  >
+                                    <svg
+                                      width="20"
+                                      height="20"
+                                      viewBox="0 0 20 20"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M15.834 5.83337C15.613 5.83337 15.401 5.92117 15.2447 6.07745C15.0884 6.23373 15.0007 6.44569 15.0007 6.66671V15.9925C14.9767 16.4139 14.7873 16.8088 14.4736 17.0912C14.1598 17.3736 13.7472 17.5205 13.3257 17.5H6.67565C6.25406 17.5205 5.84147 17.3736 5.52774 17.0912C5.21401 16.8088 5.02456 16.4139 5.00065 15.9925V6.66671C5.00065 6.44569 4.91285 6.23373 4.75657 6.07745C4.60029 5.92117 4.38833 5.83337 4.16732 5.83337C3.9463 5.83337 3.73434 5.92117 3.57806 6.07745C3.42178 6.23373 3.33398 6.44569 3.33398 6.66671V15.9925C3.35777 16.8561 3.7228 17.675 4.34913 18.2699C4.97547 18.8648 5.81204 19.1873 6.67565 19.1667H13.3257C14.1893 19.1873 15.0258 18.8648 15.6522 18.2699C16.2785 17.675 16.6435 16.8561 16.6673 15.9925V6.66671C16.6673 6.44569 16.5795 6.23373 16.4232 6.07745C16.267 5.92117 16.055 5.83337 15.834 5.83337Z"
+                                        fill="white"
+                                      />
+                                      <path
+                                        d="M16.6667 3.33337H13.3333V1.66671C13.3333 1.44569 13.2455 1.23373 13.0893 1.07745C12.933 0.921171 12.721 0.833374 12.5 0.833374H7.5C7.27899 0.833374 7.06702 0.921171 6.91074 1.07745C6.75446 1.23373 6.66667 1.44569 6.66667 1.66671V3.33337H3.33333C3.11232 3.33337 2.90036 3.42117 2.74408 3.57745C2.5878 3.73373 2.5 3.94569 2.5 4.16671C2.5 4.38772 2.5878 4.59968 2.74408 4.75596C2.90036 4.91224 3.11232 5.00004 3.33333 5.00004H16.6667C16.8877 5.00004 17.0996 4.91224 17.2559 4.75596C17.4122 4.59968 17.5 4.38772 17.5 4.16671C17.5 3.94569 17.4122 3.73373 17.2559 3.57745C17.0996 3.42117 16.8877 3.33337 16.6667 3.33337ZM8.33333 3.33337V2.50004H11.6667V3.33337H8.33333Z"
+                                        fill="white"
+                                      />
+                                      <path
+                                        d="M9.16667 14.1667V8.33333C9.16667 8.11232 9.07887 7.90036 8.92259 7.74408C8.76631 7.5878 8.55435 7.5 8.33333 7.5C8.11232 7.5 7.90036 7.5878 7.74408 7.74408C7.5878 7.90036 7.5 8.11232 7.5 8.33333V14.1667C7.5 14.3877 7.5878 14.5996 7.74408 14.7559C7.90036 14.9122 8.11232 15 8.33333 15C8.55435 15 8.76631 14.9122 8.92259 14.7559C9.07887 14.5996 9.16667 14.3877 9.16667 14.1667Z"
+                                        fill="white"
+                                      />
+                                      <path
+                                        d="M12.5007 14.1667V8.33333C12.5007 8.11232 12.4129 7.90036 12.2566 7.74408C12.1003 7.5878 11.8883 7.5 11.6673 7.5C11.4463 7.5 11.2343 7.5878 11.0781 7.74408C10.9218 7.90036 10.834 8.11232 10.834 8.33333V14.1667C10.834 14.3877 10.9218 14.5996 11.0781 14.7559C11.2343 14.9122 11.4463 15 11.6673 15C11.8883 15 12.1003 14.9122 12.2566 14.7559C12.4129 14.5996 12.5007 14.3877 12.5007 14.1667Z"
+                                        fill="white"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
