@@ -1663,16 +1663,24 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                     class="flex flex-col h-full bg-white"
                   >
                     <!-- Header Section -->
-                    <div class="flex-shrink-0 border-b border-[#CED4DA] bg-[#F5F5F5]">
+                    <div
+                      class="flex-shrink-0 border-b border-[#CED4DA] bg-[#F5F5F5]"
+                    >
                       <div class="px-6 py-6">
-                        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div
+                          class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
+                        >
                           <!-- Title -->
-                          <h2 class="text-lg lg:text-xl font-medium text-[#686868]">
+                          <h2
+                            class="text-lg lg:text-xl font-medium text-[#686868]"
+                          >
                             Exhibitors
                           </h2>
 
                           <!-- Search, Upload and Add Section -->
-                          <div class="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center">
+                          <div
+                            class="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center"
+                          >
                             <!-- Search Bar -->
                             <div class="flex-1 sm:flex-initial relative">
                               <input
@@ -1720,7 +1728,9 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                                   fill="currentColor"
                                 />
                               </svg>
-                              <span class="hidden sm:inline">Upload Exhibitor</span>
+                              <span class="hidden sm:inline"
+                                >Upload Exhibitor</span
+                              >
                             </button>
 
                             <!-- Add Button -->
@@ -1740,7 +1750,9 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                                   fill="white"
                                 />
                               </svg>
-                              <span class="hidden sm:inline">Add Exhibitors</span>
+                              <span class="hidden sm:inline"
+                                >Add Exhibitors</span
+                              >
                             </button>
                           </div>
                         </div>
@@ -1789,22 +1801,34 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                           <!-- Table Header -->
                           <thead class="bg-white border-b border-[#CED4DA]">
                             <tr class="border-b border-[#CED4DA]">
-                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]">
+                              <th
+                                class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]"
+                              >
                                 Sr. No
                               </th>
-                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]">
+                              <th
+                                class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]"
+                              >
                                 Name of Company
                               </th>
-                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]">
+                              <th
+                                class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]"
+                              >
                                 Hall No.
                               </th>
-                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]">
+                              <th
+                                class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]"
+                              >
                                 Stall No.
                               </th>
-                              <th class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]">
+                              <th
+                                class="px-6 py-4 text-left text-base font-semibold text-[#181C32] h-16 border-r border-[#CED4DA]"
+                              >
                                 Registration Code
                               </th>
-                              <th class="px-6 py-4 text-center text-base font-semibold text-[#181C32] h-16">
+                              <th
+                                class="px-6 py-4 text-center text-base font-semibold text-[#181C32] h-16"
+                              >
                                 Action
                               </th>
                             </tr>
@@ -1813,10 +1837,15 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                           <!-- Table Body -->
                           <tbody>
                             <tr
-                              *ngFor="let exhibitor of getFilteredExhibitors(); let i = index"
+                              *ngFor="
+                                let exhibitor of getFilteredExhibitors();
+                                let i = index
+                              "
                               class="border-b border-[#E9E9E9] hover:bg-[#F9F9F9] transition-colors h-16"
                             >
-                              <td class="px-6 py-4 text-base font-semibold text-[#353846] text-center border-r border-[#E9E9E9]">
+                              <td
+                                class="px-6 py-4 text-base font-semibold text-[#353846] text-center border-r border-[#E9E9E9]"
+                              >
                                 {{ i + 1 }}
                               </td>
                               <td class="px-6 py-4 border-r border-[#E9E9E9]">
@@ -1836,24 +1865,38 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                                     *ngIf="!exhibitor.companyLogo"
                                     class="w-10 h-10 flex-shrink-0 rounded-sm bg-[#F5F5F5] flex items-center justify-center text-[#B1B1B1] font-semibold text-xs border border-[#E9E9E9]"
                                   >
-                                    {{ exhibitor.companyName.substring(0, 2).toUpperCase() }}
+                                    {{
+                                      exhibitor.companyName
+                                        .substring(0, 2)
+                                        .toUpperCase()
+                                    }}
                                   </div>
-                                  <span class="text-base font-semibold text-[#353846] truncate">
+                                  <span
+                                    class="text-base font-semibold text-[#353846] truncate"
+                                  >
                                     {{ exhibitor.companyName }}
                                   </span>
                                 </div>
                               </td>
-                              <td class="px-6 py-4 text-base font-semibold text-[#353846] border-r border-[#E9E9E9]">
+                              <td
+                                class="px-6 py-4 text-base font-semibold text-[#353846] border-r border-[#E9E9E9]"
+                              >
                                 {{ exhibitor.hallNo }}
                               </td>
-                              <td class="px-6 py-4 text-base font-semibold text-[#353846] border-r border-[#E9E9E9]">
+                              <td
+                                class="px-6 py-4 text-base font-semibold text-[#353846] border-r border-[#E9E9E9]"
+                              >
                                 {{ exhibitor.stallNo }}
                               </td>
-                              <td class="px-6 py-4 text-base font-semibold text-[#353846] border-r border-[#E9E9E9]">
+                              <td
+                                class="px-6 py-4 text-base font-semibold text-[#353846] border-r border-[#E9E9E9]"
+                              >
                                 {{ exhibitor.registrationCode }}
                               </td>
                               <td class="px-6 py-4">
-                                <div class="flex justify-center items-center gap-3 h-full">
+                                <div
+                                  class="flex justify-center items-center gap-3 h-full"
+                                >
                                   <button
                                     (click)="editExhibitor(exhibitor)"
                                     class="w-10 h-10 bg-[#009FD8] hover:bg-[#0385b5] rounded-full flex items-center justify-center transition-colors flex-shrink-0 shadow-sm"
