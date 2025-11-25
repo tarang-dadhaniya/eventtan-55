@@ -19,7 +19,7 @@ import { FormsModule } from "@angular/forms";
         (click)="$event.stopPropagation()"
       >
         <!-- Modal Header -->
-        <div class="px-[30px] py-[30px] border-b border-[#CED4DA]">
+        <div class="px-[20px] py-[20px] border-b border-[#CED4DA]">
           <div class="flex items-center justify-between">
             <h2 class="text-[22px] font-medium text-[#3F4254]">
               Add Exhibitors
