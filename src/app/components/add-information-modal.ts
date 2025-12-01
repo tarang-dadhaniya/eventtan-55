@@ -13,12 +13,11 @@ import { FormsModule } from "@angular/forms";
       (click)="onOverlayClick($event)"
     >
       <div
-        class="bg-white rounded w-full max-w-2xl max-h-[90vh] flex flex-col"
+        class="bg-white rounded w-full max-w-3xl max-h-[90vh] flex flex-col"
         (click)="$event.stopPropagation()"
       >
-        <div
-          class="flex items-center justify-between px-8 py-6 border-b border-gray-200 flex-shrink-0"
-        >
+        <!-- Header -->
+        <div class="flex items-center justify-between px-8 py-6 flex-shrink-0">
           <h2 class="text-[22px] font-medium text-[#3F4254]">
             {{ editMode ? "Edit Information" : "Add Information" }}
           </h2>
@@ -46,133 +45,216 @@ import { FormsModule } from "@angular/forms";
           </button>
         </div>
 
-        <div class="flex-1 overflow-y-auto px-8 py-6">
+        <!-- Scrollable Body -->
+        <div class="flex-1 overflow-y-auto px-8 pb-6">
           <div class="space-y-6">
-            <div>
-              <label class="block text-base font-medium text-[#212529] mb-2"
-                >Title</label
-              >
-              <input
-                type="text"
-                [(ngModel)]="formData.title"
-                placeholder="Enter Title"
-                class="w-full h-[50px] px-5 border-2 border-[#E9EBEC] rounded placeholder:text-[#C2C3CB] text-base focus:outline-none focus:border-[#009FD8] transition-colors"
-              />
-            </div>
-
-            <div>
-              <label class="block text-base font-medium text-[#212529] mb-2"
-                >Type</label
-              >
+            <!-- Profile Image Upload -->
+            <div class="flex justify-center">
               <div class="relative">
-                <select
-                  [(ngModel)]="formData.type"
-                  class="w-full h-[50px] px-4 pr-10 border-2 border-[#E9EBEC] rounded text-base appearance-none focus:outline-none focus:border-[#009FD8] transition-colors"
-                  [class.text-[#C2C3CB]]="!formData.type"
-                  [class.text-[#212529]]="formData.type"
-                >
-                  <option value="" disabled selected hidden>
-                    Please Select Type
-                  </option>
-                  <option value="Standard">Standard</option>
-                  <option value="External">External</option>
-                </select>
                 <div
-                  class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none"
+                  class="w-[120px] h-[120px] rounded-full border-2 border-[#8B8B8B] overflow-hidden bg-gray-100 flex items-center justify-center cursor-pointer hover:opacity-80 transition-opacity"
+                  (click)="profileImageInput.click()"
                 >
+                  <img
+                    *ngIf="profileImagePreview"
+                    [src]="profileImagePreview"
+                    alt="Profile"
+                    class="w-full h-full object-cover"
+                  />
                   <svg
-                    width="10"
-                    height="6"
-                    viewBox="0 0 10 6"
+                    *ngIf="!profileImagePreview"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M8.31068 0.193108C8.57471 -0.0643956 9.00279 -0.0643956 9.26682 0.193108C9.53085 0.450612 9.53085 0.868109 9.26682 1.12561L5.21024 5.0819C4.95429 5.33152 4.54215 5.34026 4.27532 5.10171L0.218738 1.47512C-0.0565142 1.22904 -0.075108 0.811938 0.177206 0.543491C0.42952 0.275045 0.857196 0.25691 1.13245 0.502986L4.71184 3.70297L8.31068 0.193108Z"
-                      fill="#434349"
+                      d="M24 8C15.168 8 8 15.168 8 24C8 32.832 15.168 40 24 40C32.832 40 40 32.832 40 24C40 15.168 32.832 8 24 8ZM24 14C27.312 14 30 16.688 30 20C30 23.312 27.312 26 24 26C20.688 26 18 23.312 18 20C18 16.688 20.688 14 24 14ZM24 36.8C19.504 36.8 15.552 34.448 13.2 30.88C13.256 27.2 20.4 25.2 24 25.2C27.584 25.2 34.744 27.2 34.8 30.88C32.448 34.448 28.496 36.8 24 36.8Z"
+                      fill="#607D8B"
                     />
                   </svg>
+                </div>
+                <button
+                  type="button"
+                  class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-[#009FD8] flex items-center justify-center shadow-md hover:bg-[#0385b5] transition-colors"
+                  (click)="profileImageInput.click()"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.4296 10.537C9.3176 10.537 9.2059 10.494 9.1203 10.409C8.9495 10.238 8.9495 9.961 9.1203 9.790L15.9571 2.953C16.1278 2.782 16.4049 2.782 16.5758 2.953C16.7466 3.124 16.7466 3.401 16.5758 3.572L9.7389 10.409C9.6536 10.494 9.5416 10.537 9.4296 10.537Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M8.7543 13.688C8.7239 13.688 8.6931 13.684 8.6622 13.678C8.426 13.627 8.2755 13.394 8.3262 13.158L9.0022 10.008C9.0529 9.771 9.2866 9.621 9.5217 9.672C9.758 9.722 9.9085 9.955 9.8577 10.191L9.1818 13.342C9.1378 13.547 8.9562 13.688 8.7543 13.688Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M11.9042 13.012C11.7922 13.012 11.6805 12.969 11.5949 12.883C11.4241 12.713 11.4241 12.436 11.5949 12.265L18.4317 5.428C18.6024 5.257 18.8795 5.257 19.0504 5.428C19.2212 5.599 19.2212 5.876 19.0504 6.047L12.2138 12.883C12.1282 12.969 12.0162 13.012 11.9042 13.012Z"
+                      fill="white"
+                    />
+                  </svg>
+                </button>
+                <input
+                  #profileImageInput
+                  type="file"
+                  accept="image/*"
+                  class="hidden"
+                  (change)="onProfileImageSelected($event)"
+                />
+              </div>
+            </div>
+
+            <!-- Title and Floor Plan For Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Title Field -->
+              <div>
+                <label class="block text-base font-medium text-[#212529] mb-2"
+                  >Title</label
+                >
+                <input
+                  type="text"
+                  [(ngModel)]="formData.title"
+                  placeholder="Enter Title"
+                  class="w-full h-[50px] px-5 border-2 border-[#E9EBEC] rounded placeholder:text-[#C2C3CB] text-base focus:outline-none focus:border-[#009FD8] transition-colors"
+                />
+              </div>
+
+              <!-- Floor Plan For Field -->
+              <div>
+                <label class="block text-base font-medium text-[#212529] mb-2"
+                  >Floor Plan For</label
+                >
+                <div class="relative">
+                  <select
+                    [(ngModel)]="formData.floorPlanFor"
+                    class="w-full h-[50px] px-4 pr-10 border-2 border-[#E9EBEC] rounded text-base appearance-none focus:outline-none focus:border-[#009FD8] transition-colors"
+                    [class.text-[#C2C3CB]]="!formData.floorPlanFor"
+                    [class.text-[#212529]]="formData.floorPlanFor"
+                  >
+                    <option value="" disabled selected hidden>
+                      Please Select
+                    </option>
+                    <option value="mobile">Mobile</option>
+                    <option value="desktop">Desktop</option>
+                    <option value="both">Both</option>
+                  </select>
+                  <div
+                    class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none"
+                  >
+                    <svg
+                      width="10"
+                      height="6"
+                      viewBox="0 0 10 6"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8.31068 0.193108C8.57471 -0.0643956 9.00279 -0.0643956 9.26682 0.193108C9.53085 0.450612 9.53085 0.868109 9.26682 1.12561L5.21024 5.0819C4.95429 5.33152 4.54215 5.34026 4.27532 5.10171L0.218738 1.47512C-0.0565142 1.22904 -0.075108 0.811938 0.177206 0.543491C0.42952 0.275045 0.857196 0.25691 1.13245 0.502986L4.71184 3.70297L8.31068 0.193108Z"
+                        fill="#434349"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div>
-              <label class="block text-base font-medium text-[#212529] mb-3"
-                >Floor Plan Type</label
-              >
-              <div class="flex gap-4">
-                <label
-                  class="flex items-center gap-3 cursor-pointer group"
-                  [class.opacity-50]="!formData.type"
+            <!-- Type Radio Buttons -->
+            <div class="flex gap-6">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="type"
+                  value="Standard"
+                  [(ngModel)]="formData.type"
+                  class="w-5 h-5 border border-[#CED4DA] text-[#049AD0] focus:ring-[#049AD0]"
+                />
+                <span class="text-base font-medium text-[#212529]"
+                  >Standard</span
                 >
-                  <input
-                    type="checkbox"
-                    [checked]="formData.floorPlanTypes.includes('mobile')"
-                    (change)="toggleFloorPlanType('mobile')"
-                    [disabled]="!formData.type"
-                    class="w-5 h-5 rounded border-2 border-[#CED4DA] text-[#009FD8] focus:ring-[#009FD8] focus:ring-2 disabled:cursor-not-allowed"
-                  />
-                  <div class="flex items-center gap-2">
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 22 22"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M13.0176 1.83325H10.8176C10.5136 1.83325 10.2676 2.07929 10.2676 2.38325C10.2676 2.68721 10.5136 2.93325 10.8176 2.93325H13.0176C13.3215 2.93325 13.5676 2.68721 13.5676 2.38325C13.5676 2.07929 13.3215 1.83325 13.0176 1.83325Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M15.4004 0H6.60039C5.38747 0 4.40039 0.987078 4.40039 2.2V19.8C4.40039 21.0129 5.38747 22 6.60039 22H15.4004C16.6133 22 17.6004 21.0129 17.6004 19.8V2.2C17.6004 0.987078 16.6133 0 15.4004 0ZM16.5004 19.8C16.5004 20.4076 16.008 20.9 15.4004 20.9H6.60039C5.99281 20.9 5.50039 20.4076 5.50039 19.8V2.2C5.50039 1.59242 5.99281 1.1 6.60039 1.1H15.4004C16.008 1.1 16.5004 1.59242 16.5004 2.2V19.8Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M11.0004 20.1666C11.6079 20.1666 12.1004 19.6741 12.1004 19.0666C12.1004 18.459 11.6079 17.9666 11.0004 17.9666C10.3929 17.9666 9.90039 18.459 9.90039 19.0666C9.90039 19.6741 10.3929 20.1666 11.0004 20.1666Z"
-                        fill="black"
-                      />
-                      <path
-                        d="M8.98359 2.93325C9.28735 2.93325 9.53359 2.68701 9.53359 2.38325C9.53359 2.0795 9.28735 1.83325 8.98359 1.83325C8.67984 1.83325 8.43359 2.0795 8.43359 2.38325C8.43359 2.68701 8.67984 2.93325 8.98359 2.93325Z"
-                        fill="black"
-                      />
-                    </svg>
-                    <span class="text-base text-[#212529]">Mobile</span>
-                  </div>
-                </label>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="type"
+                  value="External"
+                  [(ngModel)]="formData.type"
+                  class="w-5 h-5 border border-[#CED4DA] text-[#049AD0] focus:ring-[#049AD0]"
+                />
+                <span class="text-base font-medium text-[#212529]"
+                  >External</span
+                >
+              </label>
+            </div>
 
-                <label
-                  class="flex items-center gap-3 cursor-pointer group"
-                  [class.opacity-50]="!formData.type"
+            <!-- Description Field -->
+            <div>
+              <label class="block text-base font-medium text-[#212529] mb-2"
+                >Description</label
+              >
+              <textarea
+                [(ngModel)]="formData.description"
+                rows="6"
+                placeholder="Enter description..."
+                class="w-full px-4 py-3 border border-[#CED4DA] rounded placeholder:text-[#C2C3CB] text-base focus:outline-none focus:border-[#009FD8] transition-colors resize-none"
+              ></textarea>
+            </div>
+
+            <!-- Featured Images Field -->
+            <div>
+              <label class="block text-base font-medium text-[#212529] mb-2"
+                >Featured Images</label
+              >
+              <div
+                class="border border-dashed border-[#B9BBBC] rounded h-[120px] flex flex-col items-center justify-center cursor-pointer hover:border-[#009FD8] transition-colors"
+                (click)="featuredImagesInput.click()"
+              >
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="mb-2"
                 >
-                  <input
-                    type="checkbox"
-                    [checked]="formData.floorPlanTypes.includes('desktop')"
-                    (change)="toggleFloorPlanType('desktop')"
-                    [disabled]="!formData.type"
-                    class="w-5 h-5 rounded border-2 border-[#CED4DA] text-[#009FD8] focus:ring-[#009FD8] focus:ring-2 disabled:cursor-not-allowed"
+                  <path
+                    d="M25.0037 27.6421H19.8316H18.4389H18.1381V20.7046H20.407C20.9824 20.7046 21.3224 20.0507 20.9824 19.5799L16.5689 13.4729C16.2877 13.0805 15.7058 13.0805 15.4246 13.4729L11.011 19.5799C10.671 20.0507 11.0045 20.7046 11.5864 20.7046H13.8553V27.6421H13.5546H12.1618H6.16592C2.73314 27.4524 0 24.242 0 20.7634C0 18.3638 1.30119 16.2714 3.23008 15.1402C3.05354 14.6629 2.96199 14.1529 2.96199 13.6167C2.96199 11.1647 4.9432 9.18353 7.39518 9.18353C7.92481 9.18353 8.43482 9.27507 8.91214 9.45162C10.331 6.44385 13.3911 4.35803 16.9481 4.35803C21.5513 4.36457 25.3437 7.88889 25.7752 12.3809C29.3126 12.989 32 16.2649 32 19.9723C32 23.9347 28.9138 27.3674 25.0037 27.6421Z"
+                    fill="#878A99"
                   />
-                  <div class="flex items-center gap-2">
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 22 22"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M21.5417 15.5834H20.1667V5.5001C20.1667 4.489 19.3444 3.66675 18.3333 3.66675H3.66665C2.65555 3.66675 1.8333 4.48896 1.8333 5.5001V15.5834H0.458305C0.205004 15.5834 0 15.7884 0 16.0417V16.5001C0 17.5112 0.822207 18.3334 1.83335 18.3334H20.1667C21.1778 18.3334 22 17.5112 22 16.5001V16.0417C22 15.7884 21.795 15.5834 21.5417 15.5834ZM2.75 5.5001C2.75 4.99478 3.16134 4.58344 3.66665 4.58344H18.3333C18.8386 4.58344 19.25 4.99478 19.25 5.5001V15.5834H13.2917H8.70835H2.75V5.5001ZM20.1667 17.4167H1.83335C1.32804 17.4167 0.916695 17.0054 0.916695 16.5001H2.2917H8.51855L8.84263 16.8242C8.92856 16.9101 9.04492 16.9584 9.1667 16.9584H12.8333C12.9551 16.9584 13.0715 16.9101 13.1574 16.8242L13.4814 16.5001H19.7083H21.0833C21.0833 17.0054 20.672 17.4167 20.1667 17.4167Z"
-                        fill="black"
-                      />
-                    </svg>
-                    <span class="text-base text-[#212529]">Desktop</span>
-                  </div>
-                </label>
+                </svg>
+                <p class="text-base font-medium text-[#212529]">
+                  Drop Images here or click to upload.
+                </p>
+                <input
+                  #featuredImagesInput
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  class="hidden"
+                  (change)="onFeaturedImagesSelected($event)"
+                />
+              </div>
+              <div
+                *ngIf="formData.featuredImages.length > 0"
+                class="mt-2 flex flex-wrap gap-2"
+              >
+                <span
+                  *ngFor="let img of formData.featuredImages"
+                  class="text-sm text-[#212529] bg-gray-100 px-2 py-1 rounded"
+                  >{{ img }}</span
+                >
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Footer -->
         <div
           class="flex items-center justify-end gap-4 px-8 py-5 border-t border-gray-200 flex-shrink-0"
         >
@@ -237,9 +319,13 @@ export class AddInformationModalComponent {
     if (data) {
       this.formData = {
         title: data.title || "",
+        floorPlanFor: data.floorPlanFor || "",
         type: data.type || "",
-        floorPlanTypes: data.floorPlanTypes || [],
+        description: data.description || "",
+        profileImage: data.profileImage || "",
+        featuredImages: data.featuredImages || [],
       };
+      this.profileImagePreview = data.profileImage || "";
     }
   }
   @Output() close = new EventEmitter<void>();
@@ -247,9 +333,14 @@ export class AddInformationModalComponent {
 
   formData = {
     title: "",
+    floorPlanFor: "",
     type: "",
-    floorPlanTypes: [] as string[],
+    description: "",
+    profileImage: "",
+    featuredImages: [] as string[],
   };
+
+  profileImagePreview: string = "";
 
   onClose() {
     this.resetForm();
@@ -267,12 +358,27 @@ export class AddInformationModalComponent {
     this.onClose();
   }
 
-  toggleFloorPlanType(type: string) {
-    const index = this.formData.floorPlanTypes.indexOf(type);
-    if (index > -1) {
-      this.formData.floorPlanTypes.splice(index, 1);
-    } else {
-      this.formData.floorPlanTypes.push(type);
+  onProfileImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.formData.profileImage = file.name;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.profileImagePreview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  onFeaturedImagesSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const fileNames = Array.from(input.files).map((file) => file.name);
+      this.formData.featuredImages = [
+        ...this.formData.featuredImages,
+        ...fileNames,
+      ];
     }
   }
 
@@ -281,12 +387,12 @@ export class AddInformationModalComponent {
       alert("Please enter a title");
       return false;
     }
-    if (!this.formData.type) {
-      alert("Please select a type");
+    if (!this.formData.floorPlanFor) {
+      alert("Please select floor plan for");
       return false;
     }
-    if (this.formData.floorPlanTypes.length === 0) {
-      alert("Please select at least one floor plan type");
+    if (!this.formData.type) {
+      alert("Please select a type");
       return false;
     }
     return true;
@@ -295,8 +401,12 @@ export class AddInformationModalComponent {
   resetForm() {
     this.formData = {
       title: "",
+      floorPlanFor: "",
       type: "",
-      floorPlanTypes: [],
+      description: "",
+      profileImage: "",
+      featuredImages: [],
     };
+    this.profileImagePreview = "";
   }
 }
