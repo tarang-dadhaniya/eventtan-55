@@ -2163,12 +2163,13 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                           >
                             {{ info.type }}
                           </div>
-                          <div
-                            class="flex items-center justify-center gap-2"
-                          >
+                          <div class="flex items-center justify-center gap-2">
                             <!-- Mobile Icon -->
                             <svg
-                              *ngIf="info.floorPlanFor === 'mobile' || info.floorPlanFor === 'both'"
+                              *ngIf="
+                                info.floorPlanFor === 'mobile' ||
+                                info.floorPlanFor === 'both'
+                              "
                               width="22"
                               height="22"
                               viewBox="0 0 22 22"
@@ -2194,7 +2195,10 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                             </svg>
                             <!-- Desktop Icon -->
                             <svg
-                              *ngIf="info.floorPlanFor === 'desktop' || info.floorPlanFor === 'both'"
+                              *ngIf="
+                                info.floorPlanFor === 'desktop' ||
+                                info.floorPlanFor === 'both'
+                              "
                               width="22"
                               height="22"
                               viewBox="0 0 22 22"
