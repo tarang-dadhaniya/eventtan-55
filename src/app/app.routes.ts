@@ -59,6 +59,10 @@ export const routes: Routes = [
     component: EventManagersComponent,
   },
   {
+    path: "testimonials",
+    component: TestimonialsComponent,
+  },
+  {
     path: "manage-profile",
     component: PlaceholderComponent,
     data: { title: "Manage Profile" },
