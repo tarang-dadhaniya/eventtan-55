@@ -68,7 +68,9 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
       ></app-event-detail-sidebar>
 
       <main class="flex-1 flex flex-col overflow-hidden">
-        <header class="h-20 sm:h-24 bg-white border-b border-[#ECECEC] px-2 sm:px-4 md:px-6 lg:px-8">
+        <header
+          class="h-20 sm:h-24 bg-white border-b border-[#ECECEC] px-2 sm:px-4 md:px-6 lg:px-8"
+        >
           <div class="h-full flex items-center gap-4">
             <button
               class="w-11 h-11 bg-primary-blue rounded flex items-center justify-center lg:hidden hover:bg-[#0385b5] transition-colors"
@@ -153,7 +155,9 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
           <div class="px-2 sm:px-4 md:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
             <div class="max-w-full sm:max-w-full lg:max-w-[1366px] mx-auto">
               <!-- Tab Navigation -->
-              <div class="flex items-center justify-center gap-0 mb-6 sm:mb-8 flex-wrap">
+              <div
+                class="flex items-center justify-center gap-0 mb-6 sm:mb-8 flex-wrap"
+              >
                 <button
                   (click)="currentTab = 'details'"
                   [class.active]="currentTab === 'details'"
@@ -1162,7 +1166,9 @@ const EVENT_OVERVIEW_ICON = `<svg width="22" height="22" viewBox="0 0 22 22" fil
                     (dragleave)="onDragLeaveSelected($event)"
                   >
                     <!-- Selected Feature Cards -->
-                    <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 lg:gap-6 w-full">
+                    <div
+                      class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 lg:gap-6 w-full"
+                    >
                       <div
                         *ngFor="let featureId of activeFeatures"
                         draggable="true"
