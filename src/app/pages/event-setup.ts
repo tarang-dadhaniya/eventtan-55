@@ -4521,22 +4521,25 @@ export class EventSetupComponent implements OnInit {
   }
 
   onTestimonialsSave(testimonialData: any) {
+    const formData: TestimonialFormData = {
+      firstName: testimonialData.firstName || '',
+      lastName: testimonialData.lastName || '',
+      company: testimonialData.company || '',
+      designation: testimonialData.designation || '',
+      isExhibitor: testimonialData.isExhibitor || false,
+      testimonialsFor: testimonialData.testimonialsFor || '',
+      message: testimonialData.message || '',
+      profileImage: testimonialData.profileImage || null,
+      profilePreview: testimonialData.profilePreview || null,
+    };
+
     if (this.editModeTestimonials && this.editingTestimonial) {
-      const index = this.testimonialsList.findIndex(
-        (t) => t.id === this.editingTestimonial.id,
-      );
-      if (index > -1) {
-        this.testimonialsList[index] = {
-          ...this.testimonialsList[index],
-          ...testimonialData,
-        };
-      }
+      this.testimonialService.updateTestimonial(this.editingTestimonial.id, formData);
     } else {
-      this.testimonialsList.push({
-        id: Date.now().toString(),
-        ...testimonialData,
-      });
+      this.testimonialService.addTestimonial(formData);
     }
+
+    this.loadTestimonials();
     this.closeTestimonialsModal();
   }
 
