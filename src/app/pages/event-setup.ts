@@ -4244,6 +4244,13 @@ export class EventSetupComponent implements OnInit {
     } else if (this.socialMediaToDelete) {
       this.socialMediaService.deleteSocialMedia(this.socialMediaToDelete);
       this.loadSocialMedia();
+    } else if (this.testimonialToDelete) {
+      const index = this.testimonialsList.findIndex(
+        (t) => t.id === this.testimonialToDelete,
+      );
+      if (index > -1) {
+        this.testimonialsList.splice(index, 1);
+      }
     } else if (this.galleryImageToDelete) {
       this.imageGalleryService.deleteGalleryImage(this.galleryImageToDelete);
       this.loadGalleryImages();
@@ -4259,6 +4266,7 @@ export class EventSetupComponent implements OnInit {
     this.informationToDelete = null;
     this.sponsorToDelete = null;
     this.socialMediaToDelete = null;
+    this.testimonialToDelete = null;
     this.galleryImageToDelete = null;
   }
 
