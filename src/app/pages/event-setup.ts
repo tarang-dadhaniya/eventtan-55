@@ -3658,6 +3658,7 @@ export class EventSetupComponent implements OnInit {
   sponsorToDelete: string | null = null;
   socialMediaToDelete: string | null = null;
   galleryImageToDelete: string | null = null;
+  testimonialToDelete: string | null = null;
   editingSocialMedia: SocialMediaEntry | null = null;
   editingGalleryImage: GalleryImage | null = null;
   aboutTitle: string = "About ENGIMACH 2023";
