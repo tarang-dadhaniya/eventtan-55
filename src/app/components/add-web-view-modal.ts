@@ -341,14 +341,23 @@ export class AddWebViewModalComponent {
       // }
     }
 
+    // Map the selected floor plan to floorPlanTypes array
+    let floorPlanTypes: string[] = [];
+    if (this.formData.floorPlanFor === "Mobile") {
+      floorPlanTypes = ["mobile"];
+    } else if (this.formData.floorPlanFor === "Web") {
+      floorPlanTypes = ["desktop"];
+    } else if (this.formData.floorPlanFor === "Both") {
+      floorPlanTypes = ["mobile", "desktop"];
+    }
+
     const webViewData = {
       title: this.formData.title,
       floorPlanFor: this.formData.floorPlanFor,
       type: this.formData.type,
       url: this.formData.type === "External" ? this.formData.url : "",
       fileName: this.formData.type === "Standard" ? this.formData.fileName : "",
-      // Keep the floorPlanTypes for backward compatibility
-      floorPlanTypes: ["mobile", "desktop"],
+      floorPlanTypes: floorPlanTypes,
     };
 
     this.save.emit(webViewData);
